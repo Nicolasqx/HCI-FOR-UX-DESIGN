@@ -9,6 +9,8 @@
   <!-- Carga diferida del script para no bloquear la maquetación del DOM -->
   <script src="js/menu.js" defer></script>
   <script src="js/interaccion.js" defer></script>
+  <script src="js/asistente.js" defer></script>
+  <script src="js/recomendador.js" defer></script>
 </head>
 <body>
   <a class="saltar" href="#contenido">Saltar al contenido</a>
@@ -71,7 +73,7 @@
     <!-- QUIÉNES SOMOS -->
     <section id="nosotros" tabindex="-1" class="seccion fondo">
       <div class="contenedor dos-columnas">
-        <img class="foto" src="imagenes/nosotros.jpg" alt="Equipo de trabajo" width="1000" height="667" loading="lazy">
+        <img class="foto" src="imagenes/imagen_2.png" alt="Equipo de trabajo" width="1000" height="667" loading="lazy">
         <div>
           <p class="etiqueta">Monitoreo y transparencia ambiental</p>
           <h2>Quiénes somos</h2>
@@ -88,23 +90,84 @@
     <section id="servicios" tabindex="-1" class="seccion contenedor">
       <p class="etiqueta">Un recorrido sencillo</p>
       <h2>Nuestros Servicios</h2>
-      <div class="tarjetas">
-        <article class="tarjeta">
+
+      <div class="rec-elegir" role="group" aria-labelledby="rec-pregunta">
+        <p id="rec-pregunta" class="rec-pregunta">¿Qué te gustaría hacer?</p>
+        <button type="button" class="rec-chip" data-rec-interes="limpieza" aria-pressed="false"><span aria-hidden="true">🧹</span> Cuidar mi barrio</button>
+        <button type="button" class="rec-chip" data-rec-interes="organizacion" aria-pressed="false"><span aria-hidden="true">🗂️</span> Ordenar un espacio</button>
+        <button type="button" class="rec-chip" data-rec-interes="datos" aria-pressed="false"><span aria-hidden="true">📊</span> Entender datos del clima</button>
+        <button type="button" class="rec-chip rec-chip-todo" data-rec-interes="todo" aria-pressed="true">Ver todo</button>
+      </div>
+
+      <p id="rec-aviso" class="rec-aviso" aria-live="polite" hidden>
+        <span aria-hidden="true">✨</span>
+        Te mostramos primero lo relacionado con <strong class="rec-motivo"></strong> porque lo elegiste.
+        Es solo una sugerencia: los demás servicios siguen disponibles.
+        <button type="button" class="rec-quitar" data-rec-interes="todo">Quitar sugerencia</button>
+      </p>
+
+      <div class="tarjetas" data-rec-lista>
+        <article class="tarjeta rec-tarjeta" data-rec-tema="limpieza">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🧹</span>
           <span class="numero">01 / Limpieza</span>
           <h3>Limpieza de ambientes</h3>
-          <p>Soluciones para crear entornos limpios, seguros y sostenibles en la comunidad.</p>
+          <p class="rec-resumen">Entornos limpios y seguros en tu comunidad.</p>
+          <ul class="rec-datos">
+            <li><span aria-hidden="true">👥</span> Vecinos y colegios</li>
+            <li><span aria-hidden="true">📍</span> En tu barrio</li>
+          </ul>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-limpieza">Vista previa</button>
+          <div id="prev-limpieza" class="rec-previa" hidden>
+            <img src="imagenes/imagen_2.png" alt="Personas trabajando en campo" width="400" height="300" loading="lazy">
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">📝</span> Eliges la zona</li>
+              <li><span aria-hidden="true">🤝</span> Organizamos la jornada</li>
+              <li><span aria-hidden="true">✅</span> Ves el antes y después</li>
+            </ol>
+          </div>
           <a href="#orientador">Ver módulos</a>
         </article>
-        <article class="tarjeta">
+        <article class="tarjeta rec-tarjeta" data-rec-tema="organizacion">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🗂️</span>
           <span class="numero">02 / Organización</span>
           <h3>Organización de espacios</h3>
-          <p>Optimización funcional de ambientes para mejorar la calidad de vida e impacto ambiental.</p>
+          <p class="rec-resumen">Ordena un ambiente para usarlo mejor y gastar menos.</p>
+          <ul class="rec-datos">
+            <li><span aria-hidden="true">🏠</span> Casas, aulas, oficinas</li>
+            <li><span aria-hidden="true">💡</span> Menos energía</li>
+          </ul>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-organizacion">Vista previa</button>
+          <div id="prev-organizacion" class="rec-previa" hidden>
+            <img src="imagenes/imagen_3.jpg" alt="Seguimiento de impacto ambiental" width="400" height="300" loading="lazy">
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">🔍</span> Revisamos el espacio</li>
+              <li><span aria-hidden="true">📐</span> Te damos un plan</li>
+              <li><span aria-hidden="true">🌱</span> Lo aplicas a tu ritmo</li>
+            </ol>
+          </div>
           <a href="#contacto">Solicitar plan</a>
         </article>
-        <article class="tarjeta">
+        <article class="tarjeta rec-tarjeta" data-rec-tema="datos">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">📊</span>
           <span class="numero">03 / Monitoreo</span>
           <h3>Mantenimiento y Datos</h3>
-          <p>Acompañamiento continuo e integración de datos para decisiones ecológicas.</p>
+          <p class="rec-resumen">Datos claros para decidir qué acción climática tomar.</p>
+          <ul class="rec-datos">
+            <li><span aria-hidden="true">🏛️</span> Municipios y ONG</li>
+            <li><span aria-hidden="true">🛰️</span> Datos abiertos</li>
+          </ul>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-datos">Vista previa</button>
+          <div id="prev-datos" class="rec-previa" hidden>
+            <img src="imagenes/imagen_1.png" alt="Mapa de visualización de emisiones" width="400" height="300" loading="lazy">
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">🧮</span> Calculas tu impacto</li>
+              <li><span aria-hidden="true">📈</span> Comparamos con datos</li>
+              <li><span aria-hidden="true">🎯</span> Eliges la acción</li>
+            </ol>
+          </div>
           <a href="recursos.html">Ver la guía</a>
         </article>
       </div>
@@ -244,15 +307,15 @@
           <h2>Únete a la Acción Climática</h2>
           <p>Completa tus datos para coordinar una reunión de evaluación o solicitar más detalles sobre la iniciativa.</p>
         </div>
-        <form action="confirmacion.html" method="get" class="formulario">
+        <form id="form-contacto" action="confirmacion.html" method="get" class="formulario">
           <label for="nombre">Nombre completo</label>
-          <input id="nombre" type="text" required maxlength="60" placeholder="Ejemplo: María Torres" autocomplete="off">
+          <input id="nombre" name="nombre" type="text" required maxlength="60" placeholder="Ejemplo: María Torres" autocomplete="off">
           
           <label for="correo">Correo electrónico</label>
-          <input id="correo" type="email" required placeholder="maria@ejemplo.org" autocomplete="off">
+          <input id="correo" name="correo" type="email" required placeholder="maria@ejemplo.org" autocomplete="off">
           
           <label for="actividad">Área de interés</label>
-          <select id="actividad" required>
+          <select id="actividad" name="actividad" required>
             <option value="">Selecciona una opción</option>
             <option>Limpieza de ambientes</option>
             <option>Organización de espacios</option>
@@ -260,10 +323,10 @@
           </select>
           
           <label for="detalle">Consulta o mensaje</label>
-          <textarea id="detalle" required minlength="8" maxlength="240" rows="3" placeholder="Describe brevemente tu solicitud..."></textarea>
+          <textarea id="detalle" name="detalle" required minlength="8" maxlength="240" rows="3" placeholder="Describe brevemente tu solicitud..."></textarea>
           
           <div>
-            <input id="acepto" type="checkbox" required>
+            <input id="acepto" name="acepto" type="checkbox" required>
             <label for="acepto">Entiendo que es una simulación de proyecto ODS.</label>
           </div>
           

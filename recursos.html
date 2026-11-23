@@ -2,71 +2,271 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <!-- PASO 1: permite que el navegador use el ancho real del celular. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video y guía | ACME</title>
-  <!-- PASO 2: conectar este HTML con el archivo CSS compartido. -->
-  <link rel="stylesheet" href="css/estilos.css">
-  <!-- Este icono aparece en la pestaña del navegador. -->
+  <title>Video y guía | Climate Trace</title>
   <link rel="icon" type="image/svg+xml" href="iconos/favicon.svg">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/menu.js" defer></script>
+  <script src="js/interaccion.js" defer></script>
+  <script src="js/recomendador.js" defer></script>
 </head>
-<body>s
-<a class="saltar" href="#contenido">Saltar al contenido</a>
-<!-- PASO 3: este header permanece visible con position: sticky en CSS. -->
-<header class="cabecera">
-  <div class="contenedor barra">
-    <a class="marca" href="index.html"><img src="iconos/favicon.svg" alt="" width="42" height="42">ACME</a>
-    <!-- PASO 4: la lista principal se ordena horizontalmente con Flexbox. -->
-    <nav aria-label="Navegación principal">
-      <ul class="menu">
-        <li><a href="index.html#inicio">Inicio</a></li>
-        <li><a href="index.html#nosotros">Nosotros</a></li>
-        <li>
-          <!-- details abre el submenú con clic, Enter o toque; no necesita JS. -->
-          <details class="desplegable">
-            <summary>Resolver</summary>
-            <!-- Esta lista es el menú vertical desplegable. -->
-            <ul class="submenu">
-              <li><a href="index.html#servicios">Servicios</a></li>
-              <li><a href="index.html#orientador">Ver objetos</a></li>
-              <li><a href="index.html#contacto">Solicitar devolución</a></li>
-            </ul>
-          </details>
-        </li>
-        
-        
-        <li><a href="recursos.html">Video y guía</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<main id="contenido" class="contenedor seccion"><p class="etiqueta">El contexto de nuestra propuesta</p><h1>Una comunidad también cuida lo que alguien olvidó.</h1>
-  <section class="dos-columnas" aria-labelledby="video-titulo"><div>
-    <!-- PASO 9: video de referencia. El enlace alternativo siempre está disponible. -->
-    <iframe
-  class="video"
-  src="https://www.youtube.com/embed/gQBJfYlDOvA"
-  title="Objetivos de Desarrollo Sostenible"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-    <p class="nota">Video general sobre los ODS de UNESCO en español. No presenta el servicio ficticio de ACME.</p><p><a href="https://www.youtube.com/watch?v=MCKH5xk8X-g" target="_blank" rel="noopener noreferrer">Abrir el video en YouTube</a> si no se reproduce aquí.</p></div>
-    <div><h2 id="video-titulo">De la feria a una pequeña red de cuidado</h2><p>Usamos el marco de los ODS como punto de partida para imaginar un servicio comunitario. ACME propone ayudar a las personas cuando una feria se traslada y pierden la referencia de dónde preguntar.</p><ol><li>Consulta una categoría de objeto.</li><li>Describe una característica ficticia.</li><li>Observa el siguiente paso de una solicitud simulada.</li></ol><a class="boton" href="index.html#orientador">Probar el recorrido</a></div>
-  </section></main>
-<!-- PASO FINAL: pie compartido por las páginas del sitio. -->
-<footer class="pie">
-  <div class="contenedor">
-    <p><strong>ACME</strong> · Objetos que vuelven a casa</p>
-    <p>Contacto de ejemplo: hola@ejemplo.org</p>
-    <nav class="redes" aria-label="Redes sociales de referencia">
-      <!-- Son páginas generales de las redes; reemplazar por cuentas del proyecto. -->
-      <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img src="iconos/facebook.svg" alt="" width="24" height="24">Facebook</a>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img src="iconos/instagram.svg" alt="" width="24" height="24">Instagram</a>
-      <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><img src="iconos/youtube.svg" alt="" width="24" height="24">YouTube</a>
-    </nav>
-    <p>© 2026 ACME · Ejemplo educativo ficticio · <a href="FUENTES.txt">Créditos de recursos</a></p>
-  </div>
-</footer>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor barra">
+      <a class="marca" href="index.html#inicio" aria-label="Climate Trace, ir al inicio">
+        <img src="imagenes/logo.jpg" alt="" width="42" height="42" style="object-fit: contain;">
+        Climate Trace
+      </a>
+
+      <button id="boton-menu" class="hamburguesa" type="button"
+              aria-controls="navegacion" aria-expanded="false" aria-label="Abrir menú">
+        <span class="lineas" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span id="texto-menu">Menú</span>
+      </button>
+
+      <nav id="navegacion" class="navegacion" aria-label="Navegación principal">
+        <ul class="menu">
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="index.html#nosotros">Nosotros</a></li>
+          <li>
+            <details id="resolver" class="desplegable">
+              <summary>Resolver</summary>
+              <ul class="submenu">
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="index.html#orientador">Ver consultas</a></li>
+                <li><a href="index.html#contacto">Solicitar informe</a></li>
+              </ul>
+            </details>
+          </li>
+          <li><a href="index.html#galeria">Galería y Video</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="recursos.html" aria-current="page">Video y guía</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="contenido" class="contenedor seccion">
+    <p class="etiqueta">Video y guía · ODS 13</p>
+    <h1>Aprende en pocos minutos</h1>
+
+    <section class="dos-columnas" aria-labelledby="video-titulo">
+      <div>
+        <iframe class="video" src="https://www.youtube.com/embed/MCKH5xk8X-g"
+          title="Los Objetivos de Desarrollo Sostenible: qué son y cómo alcanzarlos (UNESCO)"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <p class="nota"><a href="https://www.youtube.com/watch?v=MCKH5xk8X-g" target="_blank" rel="noopener noreferrer">Abrir el video en YouTube</a> si no se reproduce aquí.</p>
+      </div>
+      <div>
+        <h2 id="video-titulo">¿Qué es el ODS 13?</h2>
+        <ul class="rec-pasos">
+          <li><span aria-hidden="true">🌎</span> Es la meta mundial de <strong>actuar contra el cambio climático</strong>.</li>
+          <li><span aria-hidden="true">🏘️</span> Se logra con acciones pequeñas en cada comunidad.</li>
+          <li><span aria-hidden="true">📊</span> Climate Trace te ayuda a medir esas acciones.</li>
+        </ul>
+        <p class="nota">Video de UNESCO en español (4 min).</p>
+      </div>
+    </section>
+
+  <style>
+    #buscador-recursos { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(0, 0, 0, .12); }
+    .barra-busqueda-voz { display: flex; flex-wrap: wrap; gap: .6rem; align-items: stretch; margin: 1rem 0; }
+    .barra-busqueda-voz input[type="search"] {
+      flex: 1 1 220px; padding: .75rem 1rem; font-size: 1rem;
+      border: 1px solid #bbb; border-radius: 8px;
+    }
+    .btn-voz {
+      display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      padding: .75rem 1.1rem; border: none; border-radius: 8px; cursor: pointer;
+      font-weight: 600; background: #1f5c4d; color: #fff;
+    }
+    .btn-voz.escuchando { background: #c0392b; animation: pulsoVoz 1.2s infinite; }
+    .btn-voz:disabled { opacity: .55; cursor: not-allowed; }
+    .btn-limpiar {
+      padding: .75rem 1rem; border: 1px solid #bbb; border-radius: 8px;
+      background: transparent; cursor: pointer; font-weight: 600;
+    }
+    .sugerencias-guiadas { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0 1.25rem; }
+    .chip-sugerencia {
+      padding: .45rem .85rem; border-radius: 999px; border: 1px solid #1f5c4d;
+      background: #fff; color: #1f5c4d; font-size: .9rem; cursor: pointer;
+    }
+    .chip-sugerencia.activo, .chip-sugerencia:hover { background: #1f5c4d; color: #fff; }
+    .estado-busqueda { font-size: .92rem; margin: .5rem 0 1rem; min-height: 1.4em; }
+    .recurso-oculto { display: none !important; }
+    @keyframes pulsoVoz {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(192, 57, 43, .5); }
+      50% { box-shadow: 0 0 0 8px rgba(192, 57, 43, 0); }
+    }
+  </style>
+
+    <section id="buscador-recursos" aria-labelledby="titulo-buscador">
+      <p class="etiqueta">Búsqueda asistida · Accesibilidad móvil</p>
+      <h2 id="titulo-buscador">Encuentra guías y recursos rápidamente</h2>
+      <p>Escribe, toca una sugerencia guiada o usa el micrófono para filtrar sin esfuerzo.</p>
+
+      <div class="barra-busqueda-voz" role="search">
+        <label for="input-busqueda-recursos" class="saltar">Buscar recursos</label>
+        <input id="input-busqueda-recursos" type="search" placeholder="Ej.: emisiones, ODS 13, talleres, video..." autocomplete="off">
+        <button id="btn-voz" type="button" class="btn-voz" aria-pressed="false" aria-label="Buscar por voz">
+          <span aria-hidden="true">🎤</span>
+          <span id="texto-btn-voz">Dictar</span>
+        </button>
+        <button id="btn-limpiar-busqueda" type="button" class="btn-limpiar" hidden>Limpiar</button>
+      </div>
+
+      <div class="sugerencias-guiadas" role="group" aria-label="Sugerencias rápidas de búsqueda">
+        <button type="button" class="chip-sugerencia activo" data-termino="">Todos</button>
+        <button type="button" class="chip-sugerencia" data-termino="ODS 13">ODS 13</button>
+        <button type="button" class="chip-sugerencia" data-termino="emisiones">Emisiones</button>
+        <button type="button" class="chip-sugerencia" data-termino="guía">Guías prácticas</button>
+        <button type="button" class="chip-sugerencia" data-termino="talleres">Talleres</button>
+        <button type="button" class="chip-sugerencia" data-termino="video">Videos</button>
+      </div>
+
+      <div class="rec-elegir" role="group" aria-labelledby="rec-pregunta">
+        <p id="rec-pregunta" class="rec-pregunta">¿Qué te gustaría hacer? Te recomendamos por dónde empezar</p>
+        <button type="button" class="rec-chip" data-rec-interes="limpieza" aria-pressed="false"><span aria-hidden="true">🧹</span> Cuidar mi barrio</button>
+        <button type="button" class="rec-chip" data-rec-interes="organizacion" aria-pressed="false"><span aria-hidden="true">🗂️</span> Ordenar un espacio</button>
+        <button type="button" class="rec-chip" data-rec-interes="datos" aria-pressed="false"><span aria-hidden="true">📊</span> Entender datos del clima</button>
+        <button type="button" class="rec-chip rec-chip-todo" data-rec-interes="todo" aria-pressed="true">Ver todo</button>
+      </div>
+      <p id="rec-aviso" class="rec-aviso" aria-live="polite" hidden>
+        <span aria-hidden="true">✨</span>
+        Te mostramos primero los recursos para <strong class="rec-motivo"></strong> porque lo elegiste.
+        Es solo una sugerencia: los demás recursos siguen disponibles.
+        <button type="button" class="rec-quitar" data-rec-interes="todo">Quitar sugerencia</button>
+      </p>
+
+      <p id="estado-busqueda-voz" class="estado-busqueda" aria-live="polite">Mostrando 9 de 9 recursos disponibles.</p>
+
+      <div id="lista-recursos" class="tarjetas rec-recursos" data-rec-lista>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="general" data-keywords="ods 13 cambio climatico unesco video introduccion accion clima">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🎬</span>
+          <span class="rec-tipo">Video · ODS 13</span>
+          <h3>Introducción a los Objetivos de Desarrollo Sostenible</h3>
+          <p class="rec-resumen">Material audiovisual base de UNESCO sobre acción climática y metas globales.</p>
+          <a href="#video-titulo">Ver video arriba</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="limpieza" data-keywords="limpieza jornada vecinos barrio comunidad guia practica">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🧹</span>
+          <span class="rec-tipo">Guía · 3 min</span>
+          <h3>Organiza una jornada de limpieza</h3>
+          <p class="rec-resumen">Todo lo que necesitas para limpiar un espacio con tus vecinos.</p>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-jornada">Vista previa</button>
+          <div id="prev-jornada" class="rec-previa" hidden>
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">📍</span> Elige una zona pequeña</li>
+              <li><span aria-hidden="true">📣</span> Invita a tus vecinos</li>
+              <li><span aria-hidden="true">🧤</span> Lleva guantes y bolsas</li>
+              <li><span aria-hidden="true">📸</span> Toma fotos del antes y después</li>
+            </ol>
+          </div>
+          <a href="index.html#contacto">Pedir apoyo</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="limpieza" data-keywords="espacios limpios limpieza organizacion ambientes guia practica">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">✅</span>
+          <span class="rec-tipo">Guía · Espacios limpios</span>
+          <h3>Checklist de espacios limpios y sostenibles</h3>
+          <p class="rec-resumen">Pasos prácticos para diagnosticar y mantener entornos urbanos libres de residuos.</p>
+          <a href="index.html#servicios">Ver servicios</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="organizacion" data-keywords="ordenar organizacion espacio energia casa aula oficina guia practica">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🗂️</span>
+          <span class="rec-tipo">Guía · 2 min</span>
+          <h3>Ordena tu espacio en 3 pasos</h3>
+          <p class="rec-resumen">Un ambiente ordenado gasta menos luz y se usa mejor.</p>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-ordenar">Vista previa</button>
+          <div id="prev-ordenar" class="rec-previa" hidden>
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">🔍</span> Mira qué usas y qué no</li>
+              <li><span aria-hidden="true">♻️</span> Separa para reciclar o donar</li>
+              <li><span aria-hidden="true">💡</span> Aprovecha la luz natural</li>
+            </ol>
+          </div>
+          <a href="index.html#contacto">Solicitar plan</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="limpieza organizacion" data-keywords="talleres capacitacion comunidad resiliencia participacion social">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">👥</span>
+          <span class="rec-tipo">Talleres · Comunidad</span>
+          <h3>Talleres de acción y resiliencia comunitaria</h3>
+          <p class="rec-resumen">Dinámicas prácticas para organizar jornadas ambientales en barrios y centros educativos.</p>
+          <a href="index.html#contacto">Solicitar taller</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="datos" data-keywords="emisiones co2 monitoreo datos satelitales huella carbono reporte guia">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🛰️</span>
+          <span class="rec-tipo">Guía · Emisiones</span>
+          <h3>Guía de monitoreo de emisiones por sector</h3>
+          <p class="rec-resumen">Cómo interpretar datos abiertos de CO₂ y detectar fuentes de emisión locales.</p>
+          <a href="index.html#orientador">Explorar referencia</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="datos" data-keywords="emisiones co2 tonelada dato infografia leer entender">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">📊</span>
+          <span class="rec-tipo">Infografía · 2 min</span>
+          <h3>Cómo leer un dato de emisiones</h3>
+          <p class="rec-resumen">Qué significa “toneladas de CO₂” sin palabras técnicas.</p>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-leer-dato">Vista previa</button>
+          <div id="prev-leer-dato" class="rec-previa" hidden>
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">🏭</span> CO₂ = gas que calienta el planeta</li>
+              <li><span aria-hidden="true">🌳</span> Un árbol absorbe aprox. 20 kg al año: 1 tonelada ≈ 50 árboles</li>
+              <li><span aria-hidden="true">📉</span> Menos toneladas = mejor</li>
+            </ol>
+          </div>
+          <a href="index.html#orientador">Ver consultas</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="datos" data-keywords="calculadora impacto co2 reciclaje energia reforestacion simulador herramienta">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🧮</span>
+          <span class="rec-tipo">Herramienta · 1 min</span>
+          <h3>Simulador de huella de carbono mitigada</h3>
+          <p class="rec-resumen">Calcula toneladas de CO₂ evitadas mediante reciclaje, eficiencia energética o reforestación.</p>
+          <button type="button" class="rec-ver" aria-expanded="false" aria-controls="prev-calcular">Vista previa</button>
+          <div id="prev-calcular" class="rec-previa" hidden>
+            <ol class="rec-pasos">
+              <li><span aria-hidden="true">1️⃣</span> Elige la acción</li>
+              <li><span aria-hidden="true">2️⃣</span> Escribe la cantidad</li>
+              <li><span aria-hidden="true">3️⃣</span> Mira el resultado</li>
+            </ol>
+          </div>
+          <a href="index.html#calculadora">Ir a la calculadora</a>
+        </article>
+        <article class="tarjeta rec-tarjeta recurso-item" data-rec-tema="general" data-keywords="video institucional galeria proyecto transparencia datos presentacion">
+          <span class="rec-insignia" hidden>Recomendado para ti</span>
+          <span class="rec-icono" aria-hidden="true">🖼️</span>
+          <span class="rec-tipo">Video · Proyecto</span>
+          <h3>Presentación institucional y galería</h3>
+          <p class="rec-resumen">Recorrido visual por el trabajo en campo y seguimiento de impacto ambiental.</p>
+          <a href="index.html#galeria">Ver galería y video</a>
+        </article>
+      </div>
+
+      <div id="sin-resultados-recursos" class="tarjeta" style="margin-top: 1rem;" hidden>
+        <p style="margin: 0;"><strong>No encontramos coincidencias exactas.</strong></p>
+        <p style="margin: .4rem 0 0;">Prueba tocando una de las sugerencias guiadas de arriba o usando términos como <em>emisiones</em>, <em>ODS 13</em> o <em>talleres</em>.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>Climate Trace</strong> · Transparencia y Acción Climática</p>
+      <p>Contacto: contacto@ejemplo.org</p>
+      <nav class="redes" aria-label="Redes sociales de referencia">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img src="iconos/facebook.svg" alt="" width="24" height="24">Facebook</a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img src="iconos/instagram.svg" alt="" width="24" height="24">Instagram</a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><img src="iconos/youtube.svg" alt="" width="24" height="24">YouTube</a>
+      </nav>
+      <p>© 2026 Climate Trace · Ejemplo educativo ODS 13 · <a href="FUENTES.txt">Créditos de recursos</a></p>
+    </div>
+  </footer>
 </body>
 </html>
